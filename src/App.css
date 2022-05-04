@@ -38,7 +38,7 @@ h1,h2,h3 {
 }
 
 h1 {
-  font-size: 36pt;
+  font-size: 28pt;
 }
 
 /* Ensure we import the solana provided CSS after all our custom styles
