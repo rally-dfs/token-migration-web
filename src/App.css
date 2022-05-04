@@ -47,3 +47,7 @@ header img {
   height: 34px;
   width: 34px;
 }
+
+/* Ensure we import the solana provided CSS after all our custom styles
+They do some slightly janky stuff to make their modal work */
+@import '@solana/wallet-adapter-react-ui/styles.css';
