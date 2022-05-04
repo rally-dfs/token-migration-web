@@ -13,7 +13,6 @@
   align-items: center;
 }
 
-
 #root {
   height: 100vh;
   width: 100vw;
@@ -26,6 +25,7 @@
   min-width: 240px;
   max-width: 1280px;
   margin: auto;
+  padding: 0px 10px;
 
   color: white;
   font-family: 'Montserrat';
@@ -36,16 +36,6 @@ h1 {
   margin: 0;
   font-family: 'Montserrat';
   font-size: 36pt;
-}
-
-header {
-  padding: 20px 0px 20px 0px;
-  font-family: 'Inter';
-}
-
-header img {
-  height: 34px;
-  width: 34px;
 }
 
 /* Ensure we import the solana provided CSS after all our custom styles
