@@ -31,10 +31,13 @@
   font-family: 'Montserrat';
 }
 
-h1 {
+h1,h2,h3 {
   color: white;
   margin: 0;
   font-family: 'Montserrat';
+}
+
+h1 {
   font-size: 36pt;
 }
 

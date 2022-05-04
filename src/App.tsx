@@ -1,20 +1,18 @@
 import Card from './components/card';
-import ConnectWalletPrompt from './components/connect_wallet_prompt';
 import SolanaContext from './components/solana_context';
 import './App.css';
 import Header from './components/header';
 import Faqs from './components/faqs';
+import TransferTool from './components/transfer_tool';
 
 function App() {
   return (
     <div className="App">
       <Header />
       <SolanaContext>
-        <h1>Migrate From RLY v2 to RLY v3</h1>
+        <h1 style={{ marginBottom: 12 }}>Migrate From RLY v2 to RLY v3</h1>
 
-        <Card style={{ marginTop: 12 }}>
-          <ConnectWalletPrompt />
-        </Card>
+        <TransferTool />
 
         <Faqs />
       </SolanaContext>
