@@ -1,0 +1,21 @@
+.faq_container {
+  text-align: left;
+  max-width: 720px;
+  margin: auto;
+  cursor: pointer;
+}
+
+.faq_title {
+  margin-top: 12px;
+  font-size: 14pt;
+}
+
+.faq_expand_indicator {
+  font-size: 28pt;
+}
+
+.faq_description {
+  margin-left: 16px;
+  margin-top: 12px;
+  margin-bottom: 24px;
+}

@@ -3,6 +3,7 @@ import ConnectWalletPrompt from './components/connect_wallet_prompt';
 import SolanaContext from './components/solana_context';
 import './App.css';
 import Header from './components/header';
+import Faqs from './components/faqs';
 
 function App() {
   return (
@@ -14,6 +15,8 @@ function App() {
         <Card style={{ marginTop: 12 }}>
           <ConnectWalletPrompt />
         </Card>
+
+        <Faqs />
       </SolanaContext>
     </div>
   );
