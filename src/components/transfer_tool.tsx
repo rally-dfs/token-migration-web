@@ -22,18 +22,14 @@ const TransferTool = () => {
           flexWrap: 'wrap',
         }}>
         <button
-          className={
-            ButtonStyles.rly_button + ' ' + ButtonStyles.flexed_buttons
-          }
+          className={ButtonStyles.rly_button}
           onClick={() => {
             console.log('Need to do actual web3 stuff here');
           }}>
           Swap RLY V2
         </button>
         <button
-          className={
-            ButtonStyles.rly_button + ' ' + ButtonStyles.flexed_buttons
-          }
+          className={ButtonStyles.rly_button}
           onClick={() => {
             console.log('Need to do actual web3 stuff here');
           }}>

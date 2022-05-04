@@ -1,4 +1,3 @@
-import Card from './components/card';
 import SolanaContext from './components/solana_context';
 import './App.css';
 import Header from './components/header';
