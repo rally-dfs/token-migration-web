@@ -9,18 +9,25 @@ const TransferV2ToV3Page = () => {
     return <Navigate to="/" replace />;
   }
 
+  const fetchRlyv2Balance = async (): Promise<Number> => {
+    // Put Some Real Web3 Interaction Code Here
+    return new Promise((r) =>
+      setTimeout(() => {
+        r(100000);
+      }, 2000),
+    );
+  };
+
+  const transferRlyV2 = async () => {
+    //Do Some Real Web3 to Perform the transfer
+  };
+
   return (
     <div>
       <SolanaTransferCard
-        wallet={wallet}
         tokenHumanName={'RLY V2'}
-        fetchBalance={async () => {
-          return new Promise((r) =>
-            setTimeout(() => {
-              r(100000);
-            }, 2000),
-          );
-        }}
+        fetchBalance={fetchRlyv2Balance}
+        performTransfer={transferRlyV2}
       />
     </div>
   );

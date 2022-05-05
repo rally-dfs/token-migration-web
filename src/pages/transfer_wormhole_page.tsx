@@ -10,18 +10,25 @@ const TransferWormholePage = () => {
     return <Navigate to="/" replace />;
   }
 
+  const fetchWormholeBalance = async (): Promise<Number> => {
+    // Put Some Real Web3 Interaction Code Here
+    return new Promise((r) =>
+      setTimeout(() => {
+        r(100000);
+      }, 2000),
+    );
+  };
+
+  const transferWormhole = async () => {
+    //Do Some Real Web3 to Perform the transfer
+  };
+
   return (
     <div>
       <SolanaTransferCard
         tokenHumanName="Wormhole"
-        wallet={wallet}
-        fetchBalance={async () => {
-          return new Promise((r) =>
-            setTimeout(() => {
-              r(100000);
-            }, 2000),
-          );
-        }}
+        fetchBalance={fetchWormholeBalance}
+        performTransfer={transferWormhole}
       />
     </div>
   );

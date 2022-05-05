@@ -1,18 +1,16 @@
 import React from 'react';
-import { WalletContextState } from '@solana/wallet-adapter-react';
 import { useCallback, useEffect, useState } from 'react';
 import Card from '../components/card';
 import LoadingSpinner from '../components/loading_spinner';
 import ButtonStyles from '../styles/button.module.css';
 
 type SolanaTransferCardProps = {
-  wallet: WalletContextState | any;
   tokenHumanName: string;
-  fetchBalance: (wallet: WalletContextState) => Promise<Number>;
+  fetchBalance: () => Promise<Number>;
+  performTransfer: () => Promise<any>;
 };
 
 const SolanaTransferCard = ({
-  wallet,
   fetchBalance,
   tokenHumanName,
 }: SolanaTransferCardProps) => {
@@ -21,9 +19,9 @@ const SolanaTransferCard = ({
 
   const getRemoteBalance = useCallback(async () => {
     setLoadingBalance(true);
-    setBalance(await fetchBalance(wallet));
+    setBalance(await fetchBalance());
     setLoadingBalance(false);
-  }, [wallet, setBalance, setLoadingBalance, fetchBalance]);
+  }, [setBalance, setLoadingBalance, fetchBalance]);
 
   useEffect(() => {
     if (loadingBalance || balance) {
