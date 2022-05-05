@@ -7,25 +7,26 @@ import ButtonStyles from '../styles/button.module.css';
 
 type SolanaTransferCardProps = {
   tokenHumanName: string;
-  fetchBalance: () => Promise<Number>;
-  performTransfer: () => Promise<any>;
+  tokenBalance?: number;
+  fetchBalance: () => Promise<void>;
+  performTransfer: () => Promise<void>;
 };
 
 const SolanaTransferCard = ({
   fetchBalance,
   tokenHumanName,
   performTransfer,
+  tokenBalance,
 }: SolanaTransferCardProps) => {
-  const [balance, setBalance] = useState<Number>();
   const [loadingBalance, setLoadingBalance] = useState(false);
   const [performingSwap, setPerformingSwap] = useState(false);
   const [swapSuccessful, setSwapSuccessful] = useState(false);
 
   const getRemoteBalance = useCallback(async () => {
     setLoadingBalance(true);
-    setBalance(await fetchBalance());
+    await fetchBalance();
     setLoadingBalance(false);
-  }, [setBalance, setLoadingBalance, fetchBalance]);
+  }, [setLoadingBalance, fetchBalance]);
 
   const performSwap = useCallback(async () => {
     setPerformingSwap(true);
@@ -43,7 +44,7 @@ const SolanaTransferCard = ({
   }, [performTransfer]);
 
   useEffect(() => {
-    if (loadingBalance || balance) {
+    if (loadingBalance || tokenBalance) {
       return;
     }
 
@@ -94,7 +95,7 @@ const SolanaTransferCard = ({
     return (
       <div>
         <div>
-          You have {balance} {tokenHumanName}
+          You have {tokenBalance} {tokenHumanName}
         </div>
 
         <button
