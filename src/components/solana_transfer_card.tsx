@@ -1,5 +1,6 @@
 import React from 'react';
 import { useCallback, useEffect, useState } from 'react';
+import { Link } from 'react-router-dom';
 import Card from '../components/card';
 import LoadingSpinner from '../components/loading_spinner';
 import ButtonStyles from '../styles/button.module.css';
@@ -13,15 +14,33 @@ type SolanaTransferCardProps = {
 const SolanaTransferCard = ({
   fetchBalance,
   tokenHumanName,
+  performTransfer,
 }: SolanaTransferCardProps) => {
   const [balance, setBalance] = useState<Number>();
   const [loadingBalance, setLoadingBalance] = useState(false);
+  const [performingSwap, setPerformingSwap] = useState(false);
+  const [swapSuccessful, setSwapSuccessful] = useState(false);
 
   const getRemoteBalance = useCallback(async () => {
     setLoadingBalance(true);
     setBalance(await fetchBalance());
     setLoadingBalance(false);
   }, [setBalance, setLoadingBalance, fetchBalance]);
+
+  const performSwap = useCallback(async () => {
+    setPerformingSwap(true);
+
+    try {
+      await performTransfer();
+    } catch (err) {
+      alert('Unable to Complete Swap, Please try again');
+      setPerformingSwap(false);
+      return;
+    }
+
+    setPerformingSwap(false);
+    setSwapSuccessful(true);
+  }, [performTransfer]);
 
   useEffect(() => {
     if (loadingBalance || balance) {
@@ -31,38 +50,67 @@ const SolanaTransferCard = ({
     getRemoteBalance();
   });
 
+  const _loadingContent = () => {
+    return (
+      <div>
+        <div style={{ marginBottom: 8 }}>
+          Determining your {tokenHumanName} Balance...
+        </div>
+        <LoadingSpinner />
+      </div>
+    );
+  };
+
+  const _performingSwapContent = () => {
+    return (
+      <div>
+        <div style={{ marginBottom: 8 }}>Performing Swap on Solana</div>
+        <LoadingSpinner />
+      </div>
+    );
+  };
+
+  const _swapCompleteContent = () => {
+    return (
+      <div>
+        <div>Swap Successful!</div>
+        <Link to="/">Swap Something Else</Link>
+      </div>
+    );
+  };
+
+  const _renderRelevantView = () => {
+    if (swapSuccessful) {
+      return _swapCompleteContent();
+    }
+    if (loadingBalance) {
+      return _loadingContent();
+    }
+
+    if (performingSwap) {
+      return _performingSwapContent();
+    }
+
+    return (
+      <div>
+        <div>
+          You have {balance} {tokenHumanName}
+        </div>
+
+        <button
+          className={ButtonStyles.rly_button}
+          onClick={() => {
+            performSwap();
+          }}>
+          Migrate All to RLY V3
+        </button>
+      </div>
+    );
+  };
+
   return (
     <div>
-      <Card>
-        {loadingBalance && (
-          <div>
-            <div style={{ marginBottom: 8 }}>
-              Determining your {tokenHumanName} Balance...
-            </div>
-            <LoadingSpinner />
-          </div>
-        )}
-
-        {!loadingBalance && balance && (
-          <div>
-            <div>
-              You have {balance} {tokenHumanName}
-            </div>
-
-            <button className={ButtonStyles.rly_button} onClick={() => {}}>
-              Migrate All to RLY V3
-            </button>
-          </div>
-        )}
-
-        <div
-          className="d-flex"
-          style={{
-            marginTop: 18,
-            justifyContent: 'space-evenly',
-            flexWrap: 'wrap',
-          }}></div>
-      </Card>
+      <Card>{_renderRelevantView()}</Card>
     </div>
   );
 };

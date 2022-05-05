@@ -2,6 +2,7 @@ import React from 'react';
 import { useWallet } from '@solana/wallet-adapter-react';
 import { Navigate } from 'react-router-dom';
 import SolanaTransferCard from '../components/solana_transfer_card';
+import { sleep } from './transfer_v2_to_v3_page';
 
 const TransferWormholePage = () => {
   const wallet = useWallet();
@@ -12,11 +13,10 @@ const TransferWormholePage = () => {
 
   const fetchWormholeBalance = async (): Promise<Number> => {
     // Put Some Real Web3 Interaction Code Here
-    return new Promise((r) =>
-      setTimeout(() => {
-        r(100000);
-      }, 2000),
-    );
+
+    await sleep(2000);
+
+    return 10;
   };
 
   const transferWormhole = async () => {
