@@ -1,11 +1,13 @@
 import { useWallet } from '@solana/wallet-adapter-react';
 import React from 'react';
-import Card from './card';
-import ConnectWalletPrompt from './connect_wallet_prompt';
+import Card from '../components/card';
+import ConnectWalletPrompt from '../components/connect_wallet_prompt';
 import ButtonStyles from '../styles/button.module.css';
-import Faqs from './faqs';
+import Faqs from '../components/faqs';
+import { useNavigate } from 'react-router-dom';
 
-const TransferTool = () => {
+const TransferHomePage = () => {
+  const navigate = useNavigate();
   const wallet = useWallet();
 
   if (!wallet.connected) {
@@ -26,14 +28,14 @@ const TransferTool = () => {
           <button
             className={ButtonStyles.rly_button}
             onClick={() => {
-              console.log('Need to do actual web3 stuff here');
+              navigate('/transfer-v2-to-v3');
             }}>
             Swap RLY V2
           </button>
           <button
             className={ButtonStyles.rly_button}
             onClick={() => {
-              console.log('Need to do actual web3 stuff here');
+              navigate('/transfer-wormhole');
             }}>
             Swap Wormhole
           </button>
@@ -45,4 +47,4 @@ const TransferTool = () => {
   );
 };
 
-export default TransferTool;
+export default TransferHomePage;

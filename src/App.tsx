@@ -1,8 +1,10 @@
 import SolanaContext from './components/solana_context';
 import './App.css';
 import Header from './components/header';
-import TransferTool from './components/transfer_tool';
+import TransferHomePage from './pages/transfer_home_page';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
+import TransferV2ToV3Page from './pages/transfer_v2_to_v3_page';
+import TransferWormholePage from './pages/transfer_wormhole_page';
 
 function App() {
   return (
@@ -12,7 +14,12 @@ function App() {
         <h1 style={{ marginBottom: 12 }}>Migrate From RLY v2 to RLY v3</h1>
         <SolanaContext>
           <Routes>
-            <Route path="/" element={<TransferTool />} />
+            <Route path="transfer-v2-to-v3" element={<TransferV2ToV3Page />} />
+            <Route
+              path="transfer-wormhole"
+              element={<TransferWormholePage />}
+            />
+            <Route path="/" element={<TransferHomePage />} />
           </Routes>
         </SolanaContext>
       </div>
