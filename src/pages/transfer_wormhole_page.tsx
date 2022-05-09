@@ -4,7 +4,7 @@ import { Navigate } from 'react-router-dom';
 import SolanaTransferCard from '../components/solana_transfer_card';
 import { PublicKey, Connection, clusterApiUrl } from '@solana/web3.js';
 import { config } from '../config';
-import getBalance from '../services/getBalance';
+import getBalance from '../services/get_balance';
 
 const TransferWormholePage = () => {
   const wallet = useWallet();

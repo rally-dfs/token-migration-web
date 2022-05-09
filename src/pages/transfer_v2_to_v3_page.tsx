@@ -4,7 +4,7 @@ import { PublicKey, Connection, clusterApiUrl } from '@solana/web3.js';
 import { useWallet } from '@solana/wallet-adapter-react';
 import SolanaTransferCard from '../components/solana_transfer_card';
 import { config } from '../config';
-import getBalance from '../services/getBalance';
+import getBalance from '../services/get_balance';
 
 export const sleep = (ms: number) => new Promise((r) => setTimeout(r, ms));
 
