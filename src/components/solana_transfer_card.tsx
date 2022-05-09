@@ -7,7 +7,7 @@ import ButtonStyles from '../styles/button.module.css';
 
 type SolanaTransferCardProps = {
   tokenHumanName: string;
-  tokenBalance?: number;
+  tokenBalance?: BigInt;
   fetchBalance: () => Promise<void>;
   performTransfer: () => Promise<void>;
 };
@@ -21,12 +21,6 @@ const SolanaTransferCard = ({
   const [loadingBalance, setLoadingBalance] = useState(false);
   const [performingSwap, setPerformingSwap] = useState(false);
   const [swapSuccessful, setSwapSuccessful] = useState(false);
-
-  const getRemoteBalance = useCallback(async () => {
-    setLoadingBalance(true);
-    await fetchBalance();
-    setLoadingBalance(false);
-  }, [setLoadingBalance, fetchBalance]);
 
   const performSwap = useCallback(async () => {
     setPerformingSwap(true);
@@ -47,9 +41,10 @@ const SolanaTransferCard = ({
     if (loadingBalance || tokenBalance) {
       return;
     }
-
-    getRemoteBalance();
-  });
+    setLoadingBalance(true);
+    fetchBalance();
+    setLoadingBalance(false);
+  }, [loadingBalance, tokenBalance, fetchBalance]);
 
   const _loadingContent = () => {
     return (
@@ -95,7 +90,7 @@ const SolanaTransferCard = ({
     return (
       <div>
         <div>
-          You have {tokenBalance} {tokenHumanName}
+          You have {tokenBalance?.toString()} {tokenHumanName}
         </div>
 
         <button
