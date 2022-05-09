@@ -22,14 +22,6 @@ const SolanaTransferCard = ({
   const [performingSwap, setPerformingSwap] = useState(false);
   const [swapSuccessful, setSwapSuccessful] = useState(false);
 
-  // this causes infinite loop
-
-  /*const getRemoteBalance = useCallback(async () => {
-    setLoadingBalance(true);
-    await fetchBalance();
-    setLoadingBalance(false);
-  }, [setLoadingBalance, fetchBalance]);*/
-
   const performSwap = useCallback(async () => {
     setPerformingSwap(true);
 

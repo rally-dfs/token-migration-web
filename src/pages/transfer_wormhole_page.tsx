@@ -19,7 +19,6 @@ const TransferWormholePage = () => {
   }
 
   const fetchWormholeBalance = async () => {
-    // Put Some Real Web3 Interaction Code Here
     //get rly v2 public key
     const rlyV2Pk = new PublicKey(config.tokens.rlyWormholeMint);
 
