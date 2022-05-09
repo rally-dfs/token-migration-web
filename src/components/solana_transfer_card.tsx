@@ -52,7 +52,7 @@ const SolanaTransferCard = ({
     setLoadingBalance(true);
     fetchBalance();
     setLoadingBalance(false);
-  });
+  }, [loadingBalance, tokenBalance, fetchBalance]);
 
   const _loadingContent = () => {
     return (
@@ -94,8 +94,6 @@ const SolanaTransferCard = ({
     if (performingSwap) {
       return _performingSwapContent();
     }
-
-    console.log('token balance', tokenBalance);
 
     return (
       <div>
