@@ -1,24 +1,39 @@
 import { useState } from 'react';
 import { Navigate } from 'react-router-dom';
+import { PublicKey, Connection, clusterApiUrl } from '@solana/web3.js';
+import { useWallet } from '@solana/wallet-adapter-react';
 import SolanaTransferCard from '../components/solana_transfer_card';
+import { config } from '../config';
+import getBalance from '../services/getBalance';
 
 export const sleep = (ms: number) => new Promise((r) => setTimeout(r, ms));
 
 const TransferV2ToV3Page = () => {
-  // const wallet = useWallet();
-  const wallet = { connected: true, fake: 'wallet' };
+  const wallet = useWallet();
 
-  const [balance, setBalance] = useState<number>();
+  // get connection
+  // @TODO remove hardcoded cluster value
+
+  const connection = new Connection(clusterApiUrl('mainnet-beta'), 'confirmed');
+
+  const [balance, setBalance] = useState<BigInt>();
 
   if (!wallet.connected) {
     return <Navigate to="/" replace />;
   }
 
   const fetchRlyv2Balance = async () => {
-    // Put Some Real Web3 Interaction Code Here
-    await sleep(2000);
+    //get rly v2 public key
+    const rlyV2Pk = new PublicKey(config.tokens.rlyV2Mint);
 
-    setBalance(100000);
+    try {
+      //get rly v2 balance
+      const bal = await getBalance(wallet, connection, rlyV2Pk);
+      setBalance(bal);
+    } catch (error) {
+      // if error set balance to zero
+      setBalance(BigInt(0));
+    }
   };
 
   const transferRlyV2 = async () => {
