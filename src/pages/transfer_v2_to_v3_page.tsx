@@ -1,46 +1,51 @@
 import { useState } from 'react';
 import { Navigate } from 'react-router-dom';
-import { PublicKey, Connection, clusterApiUrl } from '@solana/web3.js';
-import { useWallet } from '@solana/wallet-adapter-react';
 import SolanaTransferCard from '../components/solana_transfer_card';
-import { config } from '../config';
-import getBalance from '../services/get_balance';
+import {
+  RlyV2DataPublicKey,
+  RlyV2MintPublicKey,
+  RlyV3DataPublickey,
+  RlyV3MintPublicKey,
+} from '../config';
+import { getBalance } from '../services/get_balance';
+import { swapWrappedCanonical } from '../services/swap_wrapped_canonical';
+import { useAnchorProvider } from '../services/use_anchor_provider';
 
 export const sleep = (ms: number) => new Promise((r) => setTimeout(r, ms));
 
 const TransferV2ToV3Page = () => {
-  const wallet = useWallet();
+  const [wallet, provider] = useAnchorProvider();
 
-  // get connection
-  // @TODO remove hardcoded cluster value
-
-  const connection = new Connection(clusterApiUrl('mainnet-beta'), 'confirmed');
-
-  const [balance, setBalance] = useState<BigInt>();
+  const [balance, setBalance] = useState<number>();
 
   if (!wallet.connected) {
     return <Navigate to="/" replace />;
   }
 
   const fetchRlyv2Balance = async () => {
-    //get rly v2 public key
-    const rlyV2Pk = new PublicKey(config.tokens.rlyV2Mint);
-
     try {
       //get rly v2 balance
-      const bal = await getBalance(wallet, connection, rlyV2Pk);
+      const bal = await getBalance(
+        wallet,
+        provider.connection,
+        RlyV2MintPublicKey,
+      );
       setBalance(bal);
     } catch (error) {
       // if error set balance to zero
-      setBalance(BigInt(0));
+      setBalance(0);
     }
   };
 
   const transferRlyV2 = async () => {
-    //Do Some Real Web3 to Perform the transfer
-    await sleep(1000);
-
-    throw new Error('Something went boom');
+    // swap v2 <> v3
+    await swapWrappedCanonical(
+      provider,
+      RlyV3MintPublicKey,
+      RlyV3DataPublickey,
+      RlyV2MintPublicKey,
+      RlyV2DataPublicKey,
+    );
   };
 
   return (

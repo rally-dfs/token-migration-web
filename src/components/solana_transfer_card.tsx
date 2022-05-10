@@ -7,7 +7,7 @@ import ButtonStyles from '../styles/button.module.css';
 
 type SolanaTransferCardProps = {
   tokenHumanName: string;
-  tokenBalance?: BigInt;
+  tokenBalance?: number;
   fetchBalance: () => Promise<void>;
   performTransfer: () => Promise<void>;
 };
@@ -95,6 +95,7 @@ const SolanaTransferCard = ({
 
         <button
           className={ButtonStyles.rly_button}
+          disabled={!tokenBalance}
           onClick={() => {
             performSwap();
           }}>

@@ -1,39 +1,49 @@
-import React, { useState } from 'react';
-import { useWallet } from '@solana/wallet-adapter-react';
+import { useState } from 'react';
 import { Navigate } from 'react-router-dom';
 import SolanaTransferCard from '../components/solana_transfer_card';
-import { PublicKey, Connection, clusterApiUrl } from '@solana/web3.js';
-import { config } from '../config';
-import getBalance from '../services/get_balance';
+import {
+  RlyV3DataPublickey,
+  RlyV3MintPublicKey,
+  RlyWormholeDataPublicKey,
+  RlyWormholePublicKey,
+} from '../config';
+import { getBalance } from '../services/get_balance';
+import { swapWrappedCanonical } from '../services/swap_wrapped_canonical';
+import { useAnchorProvider } from '../services/use_anchor_provider';
 
 const TransferWormholePage = () => {
-  const wallet = useWallet();
-  // get connection
-  // @TODO remove hardcoded cluster value
+  const [wallet, provider] = useAnchorProvider();
 
-  const connection = new Connection(clusterApiUrl('mainnet-beta'), 'confirmed');
-  const [balance, setBalance] = useState<BigInt>();
+  const [balance, setBalance] = useState<number>();
 
   if (!wallet.connected) {
     return <Navigate to="/" replace />;
   }
 
   const fetchWormholeBalance = async () => {
-    //get rly v2 public key
-    const rlyV2Pk = new PublicKey(config.tokens.rlyWormholeMint);
-
     try {
       //get rly v2 balance
-      const bal = await getBalance(wallet, connection, rlyV2Pk);
+      const bal = await getBalance(
+        wallet,
+        provider.connection,
+        RlyWormholePublicKey,
+      );
       setBalance(bal);
     } catch (error) {
       // if error set balance to zero
-      setBalance(BigInt(0));
+      setBalance(0);
     }
   };
 
   const transferWormhole = async () => {
-    //Do Some Real Web3 to Perform the transfer
+    // swap wormhole <> v3
+    await swapWrappedCanonical(
+      provider,
+      RlyV3MintPublicKey,
+      RlyV3DataPublickey,
+      RlyWormholePublicKey,
+      RlyWormholeDataPublicKey,
+    );
   };
 
   return (

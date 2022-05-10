@@ -1,21 +1,17 @@
-import { PublicKey, Connection } from '@solana/web3.js';
-import {
-  getAssociatedTokenAddress,
-  getMint,
-  getAccount,
-} from '@solana/spl-token';
+import { web3 } from '@project-serum/anchor';
 import { WalletContextState } from '@solana/wallet-adapter-react';
+import { getAssociatedTokenAddress, getMint, getAccount } from 'spl-token-v2';
 
-const getBalance = async (
+export const getBalance = async (
   wallet: WalletContextState,
-  connection: Connection,
-  tokenMintPk: PublicKey,
+  connection: web3.Connection,
+  tokenMintPk: web3.PublicKey,
 ) => {
   //get mint info
   const mint = await getMint(connection, tokenMintPk);
 
   if (!wallet.publicKey) {
-    return BigInt(0);
+    return 0;
   }
 
   // get the associated token address for the current wallet
@@ -29,7 +25,7 @@ const getBalance = async (
 
   //check that the token account is initialized
   if (!tokenAccount.isInitialized) {
-    return BigInt(0);
+    return 0;
   }
 
   // get raw amount from token account
@@ -38,9 +34,7 @@ const getBalance = async (
   const { decimals } = mint;
 
   //convert to base units
-  const bal = BigInt(amount) / BigInt(10 ** decimals);
+  const bal = Number(amount) / Number(10 ** decimals);
 
   return bal;
 };
-
-export default getBalance;
