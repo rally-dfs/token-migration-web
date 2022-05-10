@@ -7,4 +7,5 @@ export const config = {
     rlyWormholeMint: '6Y7LNYkHiJHSH8zR2HvZQzXD3QA9yFw64tyMHxBxDRe4',
     rlyWormholeData: 'FvdfyPydxRgCnFPwBdrx7B1fuBAZFxWCahATumYvzEdv',
   },
+  network: 'mainnet-beta',
 };
