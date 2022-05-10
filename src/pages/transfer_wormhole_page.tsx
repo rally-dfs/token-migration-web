@@ -13,7 +13,6 @@ import { useAnchorProvider } from '../services/use_anchor_provider';
 
 const TransferWormholePage = () => {
   const [wallet, provider] = useAnchorProvider();
-  const { connection } = provider;
 
   const [balance, setBalance] = useState<number>();
 
@@ -24,7 +23,11 @@ const TransferWormholePage = () => {
   const fetchWormholeBalance = async () => {
     try {
       //get rly v2 balance
-      const bal = await getBalance(wallet, connection, RlyWormholePublicKey);
+      const bal = await getBalance(
+        wallet,
+        provider.connection,
+        RlyWormholePublicKey,
+      );
       setBalance(bal);
     } catch (error) {
       // if error set balance to zero

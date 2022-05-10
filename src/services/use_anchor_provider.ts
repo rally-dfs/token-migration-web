@@ -6,6 +6,7 @@ import { Provider, web3 } from '@project-serum/anchor';
 
 export const useAnchorProvider = (): [WalletContextState, Provider] => {
   const wallet = useWallet();
+
   const connection = new Connection(
     clusterApiUrl(config.network as web3.Cluster as web3.Cluster),
     'confirmed',

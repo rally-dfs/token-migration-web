@@ -15,7 +15,6 @@ export const sleep = (ms: number) => new Promise((r) => setTimeout(r, ms));
 
 const TransferV2ToV3Page = () => {
   const [wallet, provider] = useAnchorProvider();
-  const { connection } = provider;
 
   const [balance, setBalance] = useState<number>();
 
@@ -26,7 +25,11 @@ const TransferV2ToV3Page = () => {
   const fetchRlyv2Balance = async () => {
     try {
       //get rly v2 balance
-      const bal = await getBalance(wallet, connection, RlyV2MintPublicKey);
+      const bal = await getBalance(
+        wallet,
+        provider.connection,
+        RlyV2MintPublicKey,
+      );
       setBalance(bal);
     } catch (error) {
       // if error set balance to zero
