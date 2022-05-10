@@ -13,7 +13,6 @@ export const getOrCreateAssociatedAccount = async (
 ) => {
   const { connection } = provider;
   const associatedAddress = await getAssociatedTokenAddress(mint, owner);
-
   try {
     return await getAccount(connection, associatedAddress);
   } catch (e) {

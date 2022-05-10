@@ -1,30 +1,19 @@
 import { useState } from 'react';
-import { useWallet } from '@solana/wallet-adapter-react';
 import { Navigate } from 'react-router-dom';
-import { Provider, web3 } from '@project-serum/anchor';
 import SolanaTransferCard from '../components/solana_transfer_card';
 import {
-  config,
   RlyV3DataPublickey,
   RlyV3MintPublicKey,
   RlyWormholeDataPublicKey,
   RlyWormholePublicKey,
 } from '../config';
-import { Wallet } from '../types/wallet';
 import { getBalance } from '../services/get_balance';
 import { swapWrappedCanonical } from '../services/swap_wrapped_canonical';
-const { Connection, clusterApiUrl } = web3;
+import { useAnchorProvider } from '../services/use_anchor_provider';
 
 const TransferWormholePage = () => {
-  // set wallet, connection, provider
-
-  const wallet = useWallet();
-  const connection = new Connection(
-    clusterApiUrl(config.network as web3.Cluster),
-    'confirmed',
-  );
-
-  const provider = new Provider(connection, wallet as Wallet, {});
+  const [wallet, provider] = useAnchorProvider();
+  const { connection } = provider;
 
   const [balance, setBalance] = useState<number>();
 
