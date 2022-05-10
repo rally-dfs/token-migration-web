@@ -95,6 +95,7 @@ const SolanaTransferCard = ({
 
         <button
           className={ButtonStyles.rly_button}
+          disabled={!tokenBalance}
           onClick={() => {
             performSwap();
           }}>
