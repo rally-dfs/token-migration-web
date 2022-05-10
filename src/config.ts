@@ -1,4 +1,5 @@
 import { PublicKey } from '@solana/web3.js';
+import { web3 } from '@project-serum/anchor';
 
 export const config = {
   tokens: {
@@ -9,7 +10,7 @@ export const config = {
     rlyWormholeMint: '6Y7LNYkHiJHSH8zR2HvZQzXD3QA9yFw64tyMHxBxDRe4',
     rlyWormholeData: 'FvdfyPydxRgCnFPwBdrx7B1fuBAZFxWCahATumYvzEdv',
   },
-  network: 'mainnet-beta',
+  network: (process.env.REACT_APP_SOLANA_CLUSTER || 'devnet') as web3.Cluster,
 };
 
 export const RlyV2MintPublicKey = new PublicKey(config.tokens.rlyV2Mint);
