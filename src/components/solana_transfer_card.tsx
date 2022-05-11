@@ -8,6 +8,7 @@ import ButtonStyles from '../styles/button.module.css';
 type SolanaTransferCardProps = {
   tokenHumanName: string;
   tokenBalance?: number;
+  txHash?: string;
   fetchBalance: () => Promise<void>;
   performTransfer: () => Promise<void>;
 };

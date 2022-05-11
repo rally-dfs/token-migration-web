@@ -42,7 +42,7 @@ export const swapWrappedCanonical = async (
   const destAmount = new BN(wrappedAmount * 10 ** canDec);
 
   // execute swap
-  await swapWrappedForCanonical({
+  return swapWrappedForCanonical({
     canSwap,
     canonicalMint: canMint,
     wrappedMint: wrappedMint,

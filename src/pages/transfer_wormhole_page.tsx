@@ -15,6 +15,7 @@ const TransferWormholePage = () => {
   const [wallet, provider] = useAnchorProvider();
 
   const [balance, setBalance] = useState<number>();
+  const [tx, setTx] = useState<string>();
 
   if (!wallet.connected) {
     return <Navigate to="/" replace />;
@@ -37,13 +38,15 @@ const TransferWormholePage = () => {
 
   const transferWormhole = async () => {
     // swap wormhole <> v3
-    await swapWrappedCanonical(
+    const tx = swapWrappedCanonical(
       provider,
       RlyV3MintPublicKey,
       RlyV3DataPublickey,
       RlyWormholePublicKey,
       RlyWormholeDataPublicKey,
     );
+
+    setTx(tx);
   };
 
   return (
