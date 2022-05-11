@@ -11,7 +11,12 @@ const TransferHomePage = () => {
   const wallet = useWallet();
 
   if (!wallet.connected) {
-    return <ConnectWalletPrompt />;
+    return (
+      <div>
+        <ConnectWalletPrompt />
+        <Faqs />
+      </div>
+    );
   }
 
   return (

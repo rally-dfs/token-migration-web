@@ -19,3 +19,8 @@
   margin-top: 12px;
   margin-bottom: 24px;
 }
+
+.faq_description p {
+  margin-top: 12px;
+  overflow-wrap: break-word;
+}
