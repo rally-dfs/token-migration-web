@@ -8,7 +8,7 @@ const ConnectWalletPrompt = () => {
   return (
     <Card>
       <div>
-        <h3>To Get Started Connect a Wallet containing RLY V2 Tokens</h3>
+        <h3>To Get Started Connect a Solana Wallet</h3>
         <button
           className={ButtonStyles.rly_button}
           onClick={() => {

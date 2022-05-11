@@ -84,7 +84,7 @@ const FaqEntry = (props: FaqEntryProps) => {
       }}>
       <div className={styles.faq_title + ' d-flex ai-center'}>
         <div className={styles.faq_expand_indicator}>
-          {expanded ? '⯆' : '⯈'}
+          {expanded ? '-' : '+'}
         </div>
         <div>{props.title}</div>
       </div>

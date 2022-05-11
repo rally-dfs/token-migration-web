@@ -92,7 +92,7 @@ const SolanaTransferCard = ({
     return (
       <div>
         <div>
-          You have {tokenBalance?.toString()} {tokenHumanName}
+          Balance: {tokenBalance?.toString()} {tokenHumanName}
         </div>
 
         <button

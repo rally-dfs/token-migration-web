@@ -11,7 +11,7 @@ function App() {
     <BrowserRouter>
       <div className="App">
         <Header />
-        <h1 style={{ marginBottom: 12 }}>Migrate From RLY v2 to RLY v3</h1>
+        <h1 style={{ marginBottom: 12 }}>Swap for new sRLY</h1>
         <SolanaContext>
           <Routes>
             <Route path="transfer-v2-to-v3" element={<TransferV2ToV3Page />} />
