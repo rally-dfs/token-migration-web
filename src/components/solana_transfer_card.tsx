@@ -78,7 +78,7 @@ const SolanaTransferCard = ({
             target="_blank"
             rel="noreferrer"
             href={`https://solscan.io/tx/${txHash}?cluster=${NETWORK}`}>
-            View transaction on SolScan
+            View Transaction on SolScan
           </a>
         </p>
 
