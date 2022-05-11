@@ -12,10 +12,16 @@
 
 .faq_expand_indicator {
   font-size: 28pt;
+  margin-right: 12px;
 }
 
 .faq_description {
   margin-left: 16px;
   margin-top: 12px;
   margin-bottom: 24px;
+}
+
+.faq_description p {
+  margin-top: 12px;
+  overflow-wrap: break-word;
 }
