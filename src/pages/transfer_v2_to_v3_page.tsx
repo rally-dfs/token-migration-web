@@ -17,6 +17,7 @@ const TransferV2ToV3Page = () => {
   const [wallet, provider] = useAnchorProvider();
 
   const [balance, setBalance] = useState<number>();
+  const [tx, setTx] = useState<string>();
 
   if (!wallet.connected) {
     return <Navigate to="/" replace />;
@@ -39,13 +40,14 @@ const TransferV2ToV3Page = () => {
 
   const transferRlyV2 = async () => {
     // swap v2 <> v3
-    await swapWrappedCanonical(
+    const tx = await swapWrappedCanonical(
       provider,
       RlyV3MintPublicKey,
       RlyV3DataPublickey,
       RlyV2MintPublicKey,
       RlyV2DataPublicKey,
     );
+    setTx(tx);
   };
 
   return (
@@ -53,6 +55,7 @@ const TransferV2ToV3Page = () => {
       <SolanaTransferCard
         tokenHumanName={'Legacy sRLY'}
         tokenBalance={balance}
+        txHash={tx}
         fetchBalance={fetchRlyv2Balance}
         performTransfer={transferRlyV2}
       />
