@@ -17,6 +17,8 @@ function App() {
           <div style={{ fontSize: 14, marginTop: 8 }}>
             <a
               className={ButtonStyle.rly_link_button}
+              target="_blank"
+              rel="noreferrer"
               href="https://solscan.io/account/sRLY3migNrkC1HLgqotpvi66qGkdNedqPZ9TJpAQhyh">
               sRLY3migNrkC1HLgqotpvi66qGkdNedqPZ9TJpAQhyh
             </a>

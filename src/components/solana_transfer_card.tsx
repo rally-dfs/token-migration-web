@@ -1,6 +1,7 @@
 import React from 'react';
 import { useCallback, useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
+import { NETWORK } from '../config';
 import Card from '../components/card';
 import LoadingSpinner from '../components/loading_spinner';
 import ButtonStyles from '../styles/button.module.css';
@@ -16,6 +17,7 @@ type SolanaTransferCardProps = {
 const SolanaTransferCard = ({
   fetchBalance,
   tokenHumanName,
+  txHash,
   performTransfer,
   tokenBalance,
 }: SolanaTransferCardProps) => {
@@ -33,7 +35,6 @@ const SolanaTransferCard = ({
       setPerformingSwap(false);
       return;
     }
-
     setPerformingSwap(false);
     setSwapSuccessful(true);
   }, [performTransfer]);
@@ -71,6 +72,16 @@ const SolanaTransferCard = ({
     return (
       <div>
         <div>Swap Successful!</div>
+        <p>
+          <a
+            className={ButtonStyles.rly_link_button}
+            target="_blank"
+            rel="noreferrer"
+            href={`https://solscan.io/tx/${txHash}?cluster=${NETWORK}`}>
+            View transaction on SolScan
+          </a>
+        </p>
+
         <Link className={ButtonStyles.rly_link_button} to="/">
           Return to Homepage
         </Link>

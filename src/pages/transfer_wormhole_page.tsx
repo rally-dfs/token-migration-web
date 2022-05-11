@@ -38,14 +38,13 @@ const TransferWormholePage = () => {
 
   const transferWormhole = async () => {
     // swap wormhole <> v3
-    const tx = swapWrappedCanonical(
+    const tx = await swapWrappedCanonical(
       provider,
       RlyV3MintPublicKey,
       RlyV3DataPublickey,
       RlyWormholePublicKey,
       RlyWormholeDataPublicKey,
     );
-
     setTx(tx);
   };
 
@@ -54,6 +53,7 @@ const TransferWormholePage = () => {
       <SolanaTransferCard
         tokenHumanName="Wormhole"
         tokenBalance={balance}
+        txHash={tx}
         fetchBalance={fetchWormholeBalance}
         performTransfer={transferWormhole}
       />
