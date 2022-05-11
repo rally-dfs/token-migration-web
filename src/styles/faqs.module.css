@@ -2,12 +2,12 @@
   text-align: left;
   max-width: 720px;
   margin: auto;
-  cursor: pointer;
 }
 
 .faq_title {
   margin-top: 12px;
   font-size: 14pt;
+  cursor: pointer;
 }
 
 .faq_expand_indicator {

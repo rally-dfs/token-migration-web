@@ -47,21 +47,27 @@ const Faqs = () => {
         <p>
           <a
             className={ButtonStyles.rly_link_button}
-            href="https://github.com/rally-dfs/token-migration-web">
+            target="_blank"
+            href="https://github.com/rally-dfs/token-migration-web"
+            rel="noreferrer">
             Source Code
           </a>
         </p>
         <p>
           <a
             className={ButtonStyles.rly_link_button}
-            href="https://discord.com/channels/727244969168863316/766044360906244116/970906048334540820">
+            target="_blank"
+            href="https://discord.com/channels/727244969168863316/766044360906244116/970906048334540820"
+            rel="noreferrer">
             Discord
           </a>
         </p>
         <p>
           <a
             className={ButtonStyles.rly_link_button}
-            href="https://rly-network.gitbook.io/rly-network/learn-more/faqs">
+            target="_blank"
+            href="https://rly-network.gitbook.io/rly-network/learn-more/faqs"
+            rel="noreferrer">
             RLY Network Documentation Wiki
           </a>
         </p>
@@ -77,12 +83,12 @@ type FaqEntryProps = {
 const FaqEntry = (props: FaqEntryProps) => {
   const [expanded, setExpanded] = useState(false);
   return (
-    <div
-      className={styles.faq_container}
-      onClick={() => {
-        setExpanded(!expanded);
-      }}>
-      <div className={styles.faq_title + ' d-flex ai-center'}>
+    <div className={styles.faq_container}>
+      <div
+        className={styles.faq_title + ' d-flex ai-center'}
+        onClick={() => {
+          setExpanded(!expanded);
+        }}>
         <div className={styles.faq_expand_indicator}>
           {expanded ? '-' : '+'}
         </div>
