@@ -70,7 +70,9 @@ const SolanaTransferCard = ({
     return (
       <div>
         <div>Swap Successful!</div>
-        <Link to="/">Swap Something Else</Link>
+        <Link className={ButtonStyles.rly_link_button} to="/">
+          Return to Homepage
+        </Link>
       </div>
     );
   };
