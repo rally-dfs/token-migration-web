@@ -101,7 +101,7 @@ const SolanaTransferCard = ({
           onClick={() => {
             performSwap();
           }}>
-          Migrate All to RLY V3
+          Swap balance for sRLY
         </button>
       </div>
     );

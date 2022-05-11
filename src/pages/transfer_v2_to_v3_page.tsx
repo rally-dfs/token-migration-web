@@ -51,7 +51,7 @@ const TransferV2ToV3Page = () => {
   return (
     <div>
       <SolanaTransferCard
-        tokenHumanName={'RLY V2'}
+        tokenHumanName={'Legacy sRLY'}
         tokenBalance={balance}
         fetchBalance={fetchRlyv2Balance}
         performTransfer={transferRlyV2}
