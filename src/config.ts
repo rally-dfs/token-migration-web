@@ -27,3 +27,6 @@ export const RlyWormholeDataPublicKey = new PublicKey(
   process.env.REACT_APP_WORMHOLE_RLY_DATA ||
     '5vK2GSkAsDRVx9L6H5X6K7MB1pKNtR9u6iCgtY3DxEAZ',
 );
+
+export const rpcURL =
+  process.env.REACT_APP_RPC_URL || 'https://api.mainnet-beta.solana.com';
