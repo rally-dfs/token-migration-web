@@ -31,6 +31,7 @@ const SolanaTransferCard = ({
     try {
       await performTransfer();
     } catch (err) {
+      console.log(err);
       alert('Unable to Complete Swap, Please try again');
       setPerformingSwap(false);
       return;
