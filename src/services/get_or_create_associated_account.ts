@@ -38,6 +38,11 @@ const createAccount = async (
   //create transaction
   const tx = new Transaction().add(createAccountIx);
 
+  if (!provider.send) {
+    alert('unable to create account');
+    return;
+  }
+
   //send transaction
   const sig = await provider.send(tx);
 

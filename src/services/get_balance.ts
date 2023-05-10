@@ -1,5 +1,6 @@
 import { web3 } from '@project-serum/anchor';
 import { WalletContextState } from '@solana/wallet-adapter-react';
+
 import { getAssociatedTokenAddress, getMint, getAccount } from 'spl-token-v2';
 
 export const getBalance = async (
@@ -21,7 +22,13 @@ export const getBalance = async (
   );
 
   // get the account info for the associated token address
-  const tokenAccount = await getAccount(connection, tokenAccountAddress);
+  const tokenAccount = await getAccount(
+    connection,
+    tokenAccountAddress,
+    'finalized',
+  );
+
+  console.log(tokenAccount.address.toBase58());
 
   //check that the token account is initialized
   if (!tokenAccount.isInitialized) {
@@ -35,6 +42,8 @@ export const getBalance = async (
 
   //convert to base units
   const bal = Number(amount) / Number(10 ** decimals);
+
+  console.log('balance', bal);
 
   return bal;
 };
